@@ -22,24 +22,6 @@ services:
       mode: replicated
       replicas: 1
 
-  logstash:
-    image: docker.elastic.co/logstash/logstash:7.5.1
-    ports:
-      - "5000:5000"
-      - "9600:9600"
-    configs:
-      - source: logstash_config
-        target: /usr/share/logstash/config/logstash.yml
-      - source: logstash_pipeline
-        target: /usr/share/logstash/pipeline/logstash.conf
-    environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-    networks:
-      - elk
-    deploy:
-      mode: replicated
-      replicas: 1
-
   kibana:
     image: docker.elastic.co/kibana/kibana:7.5.1
     ports:
@@ -57,10 +39,6 @@ configs:
 
   elastic_config:
     file: ./elasticsearch/config/elasticsearch.yml
-  logstash_config:
-    file: ./logstash/config/logstash.yml
-  logstash_pipeline:
-    file: ./logstash/pipeline/logstash.conf
   kibana_config:
     file: ./kibana/config/kibana.yml
 
