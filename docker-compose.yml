@@ -1,9 +1,8 @@
 version: '3.2'
 services:
   elasticsearch:
-    image: elasticsearch:7.2.0
+    image: elasticsearch
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
       discovery.type: single-node
     expose:
@@ -14,7 +13,7 @@ services:
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   kibana:
-    image: kibana:7.2.0
+    image: kibana
     links:
       - "elasticsearch"
     ports:
